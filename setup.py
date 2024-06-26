@@ -71,7 +71,7 @@ setup(
     install_requires=requirements,
     license=about["__license__"],
     zip_safe=False,
-    classifiers=(  # https://pypi.org/pypi?%3Aaction=list_classifiers
+    classifiers=[  # https://pypi.org/pypi?%3Aaction=list_classifiers
         "License :: OSI Approved :: MIT License",
         "Intended Audience :: Developers",
         "Development Status :: 5 - Production/Stable",
@@ -80,6 +80,6 @@ setup(
         "Programming Language :: Python :: 3.6",
         "Programming Language :: Python :: 3.7",
         "Programming Language :: Python :: 3.8",
-    ),
+    ],
     cmdclass={"publish": PublishCommand},
 )
