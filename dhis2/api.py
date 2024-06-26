@@ -35,18 +35,19 @@ class Api(object):
     def __init__(
         self,
         server: str,
-        username: str,
+        username: str = None,
         password: str = None,
         api_access_token: str = None,
         api_version: Union[int, str] = None,
         user_agent: str = None,
+        validate: bool = False
     ) -> None:
         """
 
         :param server: baseurl, e.g. 'play.dhis2.org/demo'
         :param username: DHIS2 username
         :param password: DHIS2 password
-        :param password: DHIS2 password
+        :param api_access_token: DHIS2 private api token
         :param api_version: optional, creates a url like /api/29/schemas
         :param user_agent: optional, add user-agent to header. otherwise it uses requests' user-agent.
         """
@@ -63,15 +64,20 @@ class Api(object):
         self.api_version = api_version
 
         self.session = requests.Session()
-        self.username = username
         if password is not None:
+            self.username = username
             self.session.auth = (self.username, password)
         elif api_access_token is not None:
             self.session.headers["Authorization"] = f"ApiToken {api_access_token}"
+            self.username = "<You are using PAT>"
         else:
             raise ClientException("You need to define password or api_access_token in API construction.")
         if user_agent:
             self.session.headers["user-agent"] = user_agent
+        if validate:
+            self.username = self.get("me", params=[("fields","username")]).json()['username']
+            print(self.username)
+
 
     def get_base_url(self) -> Optional[str]:
         return self._base_url
