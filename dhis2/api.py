@@ -40,7 +40,8 @@ class Api(object):
         api_access_token: str = None,
         api_version: Union[int, str] = None,
         user_agent: str = None,
-        validate: bool = False
+        validate: bool = False,
+        deny_self_signed_certificate: bool = True
     ) -> None:
         """
 
@@ -64,6 +65,7 @@ class Api(object):
         self.api_version = api_version
 
         self.session = requests.Session()
+        self.session.verify = deny_self_signed_certificate
         if password is not None:
             self.username = username
             self.session.auth = (self.username, password)
