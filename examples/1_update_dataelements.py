@@ -8,7 +8,7 @@ Print errors if it failed.
 
 # Create a Api object
 api = Api("play.im.dhis2.org/dev", "admin", "district")
-# api = Api("play.im.dhis2.org/dev", api_access_token="d2p_Y0WIFJZx9AFISuUS1EC8tCOlqUZy5S6QRwEiZZeFh3P33rl1wa", validate=True)
+# api = Api("play.im.dhis2.org/dev", api_access_token="d2p_Y0Wxxxxxxxxyyyyyyyyzzzzzzzzzzz", validate=True)
 
 # setup the logger
 setup_logger()
